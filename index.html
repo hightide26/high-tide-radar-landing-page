@@ -1006,6 +1006,134 @@ footer{
 .faq-a a:hover{text-decoration:underline}
 
 /* ════════════════════════════════════════
+   PREMIUM ANIMATIONS
+════════════════════════════════════════ */
+
+/* Scroll progress bar */
+#scroll-progress{
+  position:fixed;top:68px;left:0;width:100%;height:2px;z-index:199;
+  background:linear-gradient(90deg,var(--purple),var(--purple-3),var(--purple-2));
+  transform-origin:0 50%;transform:scaleX(0);
+  will-change:transform;pointer-events:none;
+}
+
+/* Directional reveal variants */
+.fi-left{
+  opacity:0;transform:translateX(-52px);
+  transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1);
+}
+.fi-left.visible{opacity:1;transform:translateX(0)}
+.fi-right{
+  opacity:0;transform:translateX(52px);
+  transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1);
+}
+.fi-right.visible{opacity:1;transform:translateX(0)}
+.fi-scale{
+  opacity:0;transform:scale(.93);
+  transition:opacity .65s cubic-bezier(.23,1,.32,1),transform .65s cubic-bezier(.23,1,.32,1);
+}
+.fi-scale.visible{opacity:1;transform:scale(1)}
+
+/* CTA primary shimmer sweep */
+.btn-primary{position:relative;overflow:hidden}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);
+  background-size:250% 100%;background-position:-150% 0;
+  animation:btn-shimmer 3s ease-in-out infinite;
+}
+@keyframes btn-shimmer{
+  0%,35%{background-position:-150% 0}
+  75%,100%{background-position:250% 0}
+}
+
+/* Stat number pop */
+@keyframes num-pop{
+  0%{transform:scale(1)}
+  45%{transform:scale(1.13)}
+  100%{transform:scale(1)}
+}
+.stat-num.pop{animation:num-pop .38s cubic-bezier(.34,1.56,.64,1)}
+
+/* Big stat glow pulse */
+@keyframes big-glow{
+  0%,100%{text-shadow:0 0 80px rgba(34,211,238,.3)}
+  50%{text-shadow:0 0 150px rgba(34,211,238,.6),0 0 50px rgba(34,211,238,.45)}
+}
+.big-num{animation:big-glow 4s ease-in-out infinite}
+
+/* Hero live badge ambient glow */
+@keyframes badge-glow{
+  0%,100%{box-shadow:none}
+  50%{box-shadow:0 0 22px rgba(8,145,178,.28)}
+}
+.hero-badge-live{animation:badge-glow 3.2s ease-in-out infinite}
+
+/* Step number ring pulse */
+@keyframes ring-pulse{
+  0%,100%{box-shadow:0 0 0 8px var(--purple-light)}
+  50%{box-shadow:0 0 0 16px rgba(8,145,178,.06),0 0 0 8px var(--purple-light)}
+}
+.step-num{animation:ring-pulse 3.5s ease-in-out infinite}
+
+/* Featured beta card shimmer overlay */
+.beta-card.featured::before{
+  content:'';position:absolute;inset:0;border-radius:var(--radius-lg);
+  background:linear-gradient(135deg,rgba(34,211,238,.12) 0%,transparent 50%,rgba(8,145,178,.08) 100%);
+  background-size:300% 300%;
+  animation:featured-bg 6s ease infinite;pointer-events:none;
+}
+@keyframes featured-bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* Pain / audience / howit / beta card will-change */
+.pain-card,.audience-card,.howit-card,.hf-card{
+  transition:transform .45s cubic-bezier(.23,1,.32,1),box-shadow .45s ease;
+  will-change:transform;
+}
+.beta-card{
+  transition:all .45s cubic-bezier(.23,1,.32,1);
+  will-change:transform;
+}
+
+/* Howit card hover lift */
+.howit-card:hover{transform:translateY(-7px);box-shadow:var(--shadow-lg)}
+
+/* Screenshot scale on hover — desktop only */
+@media(min-width:961px){
+  .screenshot-wrap:hover .browser-frame{
+    transform:perspective(1200px) rotateY(0deg) rotateX(0deg) scale(1.015);
+    box-shadow:var(--shadow-xl);
+  }
+}
+
+/* FAQ trigger hover */
+.faq-trigger:hover .faq-q{color:var(--purple)}
+
+/* Marquee pause on hover */
+.marquee-track:hover{animation-play-state:paused}
+
+/* Section label float-up on visible */
+.label.fi.visible{animation:label-float .5s cubic-bezier(.23,1,.32,1) both}
+@keyframes label-float{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Prefers reduced motion — kill everything */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+  #scroll-progress{display:none}
+}
+
+/* ════════════════════════════════════════
    RESPONSIVE — TABLET (≤960px)
 ════════════════════════════════════════ */
 @media(max-width:960px){
@@ -1102,6 +1230,9 @@ footer{
 </style>
 </head>
 <body>
+
+<!-- Scroll progress -->
+<div id="scroll-progress"></div>
 
 <!-- ══ NAV ══ -->
 <nav id="mainNav">
@@ -1302,15 +1433,15 @@ footer{
   <div class="container-wide">
     <div class="stats-row">
       <div class="stat-cell fi">
-        <div class="stat-num">280M+</div>
+        <div class="stat-num" data-count="280" data-suffix="M+" data-final="280M+">280M+</div>
         <div class="stat-lbl">Consumer Profiles</div>
       </div>
       <div class="stat-cell fi fi-delay-1">
-        <div class="stat-num">40K+</div>
+        <div class="stat-num" data-count="40" data-suffix="K+" data-final="40K+">40K+</div>
         <div class="stat-lbl">Intent Topic Categories</div>
       </div>
       <div class="stat-cell fi fi-delay-2">
-        <div class="stat-num">70%</div>
+        <div class="stat-num" data-count="70" data-suffix="%" data-final="70%">70%</div>
         <div class="stat-lbl">Visitor Match Rate</div>
       </div>
       <div class="stat-cell fi fi-delay-3">
@@ -1423,7 +1554,7 @@ footer{
 <section class="feature-section alt">
   <div class="container">
     <div class="feature-grid">
-      <div class="feature-copy">
+      <div class="feature-copy fi-left">
         <span class="label fi">Intent Data</span>
         <h2 class="fi fi-delay-1">Build a Custom Audience Around <span style="color:var(--purple-3)">Exactly Who's Ready to Buy</span></h2>
         <p class="fi fi-delay-2">
@@ -1437,7 +1568,7 @@ footer{
           <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>B2C and B2B audience types in the same platform</li>
         </ul>
       </div>
-      <div class="screenshot-wrap fi fi-delay-2">
+      <div class="screenshot-wrap fi-right fi-delay-2">
         <div class="browser-frame">
           <div class="browser-bar">
             <div class="b-dot b-dot-r"></div>
@@ -1463,7 +1594,7 @@ footer{
 <section class="feature-section">
   <div class="container">
     <div class="feature-grid flip">
-      <div class="feature-copy">
+      <div class="feature-copy fi-right">
         <span class="label fi">Audience Management</span>
         <h2 class="fi fi-delay-1">Every Audience You've Built, <span style="color:var(--purple-3)">All in One Place</span></h2>
         <p class="fi fi-delay-2">
@@ -1477,7 +1608,7 @@ footer{
           <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>One-click preview before exporting or syncing to ad platforms</li>
         </ul>
       </div>
-      <div class="screenshot-wrap fi fi-delay-2">
+      <div class="screenshot-wrap fi-left fi-delay-2">
         <div class="browser-frame">
           <div class="browser-bar">
             <div class="b-dot b-dot-r"></div>
@@ -1503,7 +1634,7 @@ footer{
 <section class="feature-section alt">
   <div class="container">
     <div class="feature-grid">
-      <div class="feature-copy">
+      <div class="feature-copy fi-left">
         <span class="label fi">Contact Intelligence</span>
         <h2 class="fi fi-delay-1">Real People. <span style="color:var(--purple-3)">Real Contact Data.</span> Ready to Reach.</h2>
         <p class="fi fi-delay-2">
@@ -1517,7 +1648,7 @@ footer{
           <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Export the top 500 records in one click — or push directly to ad platforms</li>
         </ul>
       </div>
-      <div class="screenshot-wrap fi fi-delay-2">
+      <div class="screenshot-wrap fi-right fi-delay-2">
         <div class="browser-frame">
           <div class="browser-bar">
             <div class="b-dot b-dot-r"></div>
@@ -1544,7 +1675,7 @@ footer{
   <div class="container">
     <div class="bigstat-inner">
       <div class="fi"><span class="label">The Impact</span></div>
-      <div class="big-num fi fi-delay-1">40%</div>
+      <div class="big-num fi fi-delay-1" data-count="40" data-suffix="%" data-final="40%">40%</div>
       <p class="big-desc fi fi-delay-2">
         <strong>Projected marketing cost reduction</strong> when businesses shift from broad awareness spend to precision, intent-driven audiences with High Tide Radar.
       </p>
@@ -2075,6 +2206,68 @@ window.addEventListener('scroll', () => {
   shell.addEventListener('mousemove', resetHide);
   shell.addEventListener('touchstart', resetHide, { passive: true });
 })();
+
+// ── Scroll progress bar ──
+const scrollProg = document.getElementById('scroll-progress');
+function updateScrollProgress(){
+  const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+  scrollProg.style.transform = `scaleX(${Math.min(pct,1)})`;
+}
+window.addEventListener('scroll', updateScrollProgress, {passive:true});
+
+// ── Directional reveals (fi-left, fi-right, fi-scale) ──
+const dirObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); dirObs.unobserve(e.target); }
+  });
+}, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fi-left,.fi-right,.fi-scale').forEach(el => dirObs.observe(el));
+
+// ── Stat counter animation ──
+function easeOutQuart(t){ return 1 - Math.pow(1-t,4); }
+function animateCounter(el){
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const final  = el.dataset.final  || (target + suffix);
+  const dur    = 1800;
+  const start  = performance.now();
+  (function tick(now){
+    const t   = Math.min((now - start)/dur, 1);
+    const val = easeOutQuart(t) * target;
+    el.textContent = (val < 1 ? val.toFixed(1) : Math.round(val)) + suffix;
+    if(t < 1) requestAnimationFrame(tick);
+    else{
+      el.textContent = final;
+      el.classList.add('pop');
+      setTimeout(()=>el.classList.remove('pop'), 420);
+    }
+  })(start);
+}
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting && e.target.dataset.count && !e.target.dataset.animated){
+      e.target.dataset.animated = '1';
+      animateCounter(e.target);
+      counterObs.unobserve(e.target);
+    }
+  });
+}, {threshold:0.6});
+document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
+
+// ── 3D card tilt on hover ──
+document.querySelectorAll('.pain-card,.audience-card,.howit-card,.beta-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    card.style.transform = `perspective(700px) rotateX(${-y*7}deg) rotateY(${x*7}deg) translateY(-5px)`;
+    card.style.boxShadow = '0 24px 64px rgba(0,0,0,.15), 0 8px 24px rgba(0,0,0,.08)';
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.boxShadow = '';
+  });
+});
 
 // ── FAQ Accordion ──
 document.querySelectorAll('.faq-trigger').forEach(trigger => {
