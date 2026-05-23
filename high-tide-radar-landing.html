@@ -301,6 +301,15 @@ nav.scrolled{background:rgba(255,255,255,.98);box-shadow:var(--shadow-sm)}
 .hf-text-wrap{text-align:left}
 .hf-num{font-size:.82rem;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.2}
 .hf-label{font-size:.66rem;color:rgba(255,255,255,.5);line-height:1.4;font-weight:500;margin-top:2px}
+.hf-card-tall{flex-direction:column;gap:10px}
+.hf-card-header{display:flex;align-items:flex-start;gap:10px}
+.hf-divider{height:1px;background:rgba(255,255,255,.08);width:100%}
+.hf-contact-rows{display:flex;flex-direction:column;gap:7px;width:100%}
+.hf-contact-row{display:flex;align-items:center;gap:7px}
+.hf-contact-row svg{width:11px;height:11px;stroke:#22d3ee;stroke-width:2;flex-shrink:0;opacity:.8}
+.hf-contact-row span{font-size:.6rem;color:rgba(255,255,255,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.hf-icon-flame{background:rgba(251,146,60,.15);border-color:rgba(251,146,60,.3)}
+.hf-icon-flame svg{stroke:#fb923c;width:16px;height:16px}
 .hero-content{position:relative;z-index:1}
 .hero-eyebrow{
   display:flex;align-items:center;justify-content:center;gap:12px;
@@ -1171,24 +1180,44 @@ footer{
 
       <!-- Right cards -->
       <div class="hf-side-col fi fi-delay-3">
-        <div class="hf-card">
-          <div class="hf-icon">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+
+        <!-- Card: site visitors identified -->
+        <div class="hf-card hf-card-tall">
+          <div class="hf-card-header">
+            <span class="hf-pulse"></span>
+            <div class="hf-text-wrap">
+              <div class="hf-num">25 visitors</div>
+              <div class="hf-label">to your website yesterday</div>
+            </div>
           </div>
-          <div class="hf-text-wrap">
-            <div class="hf-num">280M+ profiles</div>
-            <div class="hf-label">consumer database, ready to target</div>
+          <div class="hf-divider"></div>
+          <div class="hf-contact-rows">
+            <div class="hf-contact-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>(555) 847-2901</span>
+            </div>
+            <div class="hf-contact-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <span>j.miller@gmail.com</span>
+            </div>
+            <div class="hf-contact-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <span>linkedin.com/in/jmiller</span>
+            </div>
           </div>
         </div>
+
+        <!-- Card: high intent signals -->
         <div class="hf-card">
-          <div class="hf-icon">
-            <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          <div class="hf-icon hf-icon-flame">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
           </div>
           <div class="hf-text-wrap">
-            <div class="hf-num">70% match rate</div>
-            <div class="hf-label">site visitor identification</div>
+            <div class="hf-num">47 people</div>
+            <div class="hf-label">high intent for your services today</div>
           </div>
         </div>
+
       </div>
 
     </div><!-- /hero-middle-row -->
