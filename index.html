@@ -25,6 +25,18 @@
 <meta name="twitter:description" content="Stop guessing who to market to. High Tide Radar identifies in-market buyers and website visitors by name, builds your ad audiences automatically, and reaches them through digital ads and direct mail."/>
 <meta name="twitter:image" content="https://high-tide-radar-pricing.pages.dev/og-image.svg"/>
 
+<!-- High Tide Radar pixel -->
+<script type="text/javascript">
+(function(s, p, i, c, e) {
+    s[e] = s[e] || function() { (s[e].a = s[e].a || []).push(arguments); };
+    s[e].l = 1 * new Date();
+    var t = new Date().getTime();
+    var k = c.createElement("script"), a = c.getElementsByTagName("script")[0];
+    k.async = 1, k.src = p + "?request_id=" + i + "&t=" + t, a.parentNode.insertBefore(k, a);
+    s.pixelClientId = i;
+})(window, "https://radar.hightidemarketing.com/script", "high-tide-radar", document, "script");
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet"/>
